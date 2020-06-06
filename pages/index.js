@@ -1,6 +1,7 @@
 import Head from 'next/head'
-import { useState } from 'react'
-import { motion, useAnimation } from 'framer-motion'
+import { useState, useEffect, useRef } from 'react'
+import { motion } from 'framer-motion'
+import Tone, { Synth } from 'tone'
 
 const batonStyles = {
   height: 48,
@@ -45,12 +46,23 @@ const mainContent = {
 
 const Conductor = () => {
   const [ isPlaying, togglePlay ] = useState(false);
-  const controls = useAnimation()
+  const synth = useRef()
+
+  useEffect(() => {
+    synth.current = new Synth().toMaster()
+    Tone.Transport.schedule(time => synth.current.triggerAttackRelease('C4', '8n', time), 0)
+    Tone.Transport.schedule(time => synth.current.triggerAttackRelease('G4', '8n', time), "0:2")
+    Tone.Transport.loop = true
+    Tone.Transport.loopEnd = '1m'
+  })
+
+  const triggerSynth = () => Tone.Transport.toggle()
 
   return (
     <main style={mainContent} onClick={() => togglePlay(!isPlaying)}>
       <h1 style={h1Style}>Conductor</h1>
-      <motion.div style={batonStyles} initial="playing" animate={ isPlaying ? "playing" : "paused"} variants={variants}></motion.div>
+      <motion.div style={batonStyles} initial="playing" animate={ isPlaying ? "playing" : "paused" } variants={variants}></motion.div>
+      <button onClick={triggerSynth}>{ isPlaying ? "stop" : 'start'}</button>
     </main>
   )
 }
