@@ -46,6 +46,7 @@ const mainContent = {
 
 const Conductor = () => {
   const [ isPlaying, togglePlay ] = useState(false);
+  const [ bpm, setBpm ] = useState(120)
   const synth = useRef()
 
   useEffect(() => {
@@ -54,15 +55,20 @@ const Conductor = () => {
     Tone.Transport.schedule(time => synth.current.triggerAttackRelease('G4', '8n', time), "0:2")
     Tone.Transport.loop = true
     Tone.Transport.loopEnd = '1m'
+    Tone.Transport.bpm.value = bpm
   })
 
-  const triggerSynth = () => Tone.Transport.toggle()
+  const triggerSynth = () => {
+    Tone.Transport.toggle()
+    togglePlay(!isPlaying)
+  }
 
   return (
-    <main style={mainContent} onClick={() => togglePlay(!isPlaying)}>
+    <main style={mainContent}>
       <h1 style={h1Style}>Conductor</h1>
       <motion.div style={batonStyles} initial="playing" animate={ isPlaying ? "playing" : "paused" } variants={variants}></motion.div>
       <button onClick={triggerSynth}>{ isPlaying ? "stop" : 'start'}</button>
+      <input type="number" value={bpm} onChange={e => setBpm(e.target.value)} />
     </main>
   )
 }
