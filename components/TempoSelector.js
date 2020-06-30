@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import styles from './TempoSelector.module.css'
 
 const itemWidth = 140
@@ -22,6 +22,7 @@ const listItemStyles = {
 }
 
 const TempoSelector = () => {
+  const container = useRef()
   const [ scrollX, setScrollX ] = useState(0)
   const [ highlightIndex, setHighlightIndex ] = useState(0)
   const range = [...Array(211).keys()]
@@ -29,13 +30,16 @@ const TempoSelector = () => {
   useEffect(() => {
     const index = Math.round(scrollX / itemWidth)
     setHighlightIndex(index)
-    console.log(scrollX)
-    console.log(scrollX/itemWidth)
+    console.log(container)
   }, [scrollX])
+
+  useEffect(() => {
+    container.current.scrollLeft = 12600
+  }, [])
 
   return (
     <div>
-      <div style={listStyles} onScroll={e => setScrollX(e.target.scrollLeft)}>
+      <div style={listStyles} onScroll={e => setScrollX(e.target.scrollLeft)} ref={container}>
         {range.map((n, i) => (
           <div key={i} style={listItemStyles} className={i === highlightIndex ? styles.highlighted : null}>{n + 30}</div>
         ))}
