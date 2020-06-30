@@ -21,16 +21,16 @@ const listItemStyles = {
   colour: '#04153F'
 }
 
-const TempoSelector = () => {
+const TempoSelector = ({ setTempo }) => {
   const container = useRef()
   const [ scrollX, setScrollX ] = useState(0)
   const [ highlightIndex, setHighlightIndex ] = useState(0)
-  const range = [...Array(211).keys()]
+  const range = [...Array(211).keys()].map(n => n + 30)
 
   useEffect(() => {
-    const index = Math.round(scrollX / itemWidth)
-    setHighlightIndex(index)
-    console.log(container)
+    const highlightIndex = Math.round(Math.round(scrollX / itemWidth))
+    setHighlightIndex(highlightIndex)
+    setTempo(range[highlightIndex])
   }, [scrollX])
 
   useEffect(() => {
@@ -41,7 +41,7 @@ const TempoSelector = () => {
     <div>
       <div style={listStyles} onScroll={e => setScrollX(e.target.scrollLeft)} ref={container}>
         {range.map((n, i) => (
-          <div key={i} style={listItemStyles} className={i === highlightIndex ? styles.highlighted : null}>{n + 30}</div>
+          <div key={i} style={listItemStyles} className={i === highlightIndex ? styles.highlighted : null}>{n}</div>
         ))}
       </div>
     </div>
