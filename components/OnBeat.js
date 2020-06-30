@@ -24,19 +24,18 @@ const OnBeat = () => {
       if (isPlaying) {
         const synth = new Synth().toMaster()
         Tone.Transport.schedule(time => synth.triggerAttackRelease('C4', '16n', time), 0)
-        Tone.Transport.loop = true
-        Tone.Transport.loopEnd = '8n'
+        Tone.Transport.loopEnd = '1m'
         Tone.Transport.bpm.value = tempo
-        console.log(tempo)
+        Tone.Transport.loop = true
         Tone.Transport.start()
       } else {
         Tone.Transport.loop = false
+        Tone.Transport.stop()
       }
     }, [isPlaying])
 
     useEffect(() => {
       Tone.Transport.bpm.value = tempo
-      console.log(tempo)
     }, [tempo])
   
     return (
