@@ -35,13 +35,14 @@ const OnBeat = () => {
     }, [isPlaying])
 
     useEffect(() => {
+      console.log(tempo)
       Tone.Transport.bpm.value = tempo
     }, [tempo])
   
     return (
       <main>
         <PlayButton isPlaying={isPlaying} togglePlay={togglePlay} />
-        <TempoSelector setTempo={setTempo} />
+        <TempoSelector tempo={tempo} setTempo={setTempo} minTempo={30} maxTempo={300} />
       </main>
     )
   }

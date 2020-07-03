@@ -1,0 +1,68 @@
+.tempoList {
+  list-style: none;
+  display: flex;
+  overflow-y: hidden;
+  overflow-x: scroll;
+  scroll-snap-type: x proximity;
+  width: auto;
+  padding-left: calc(50vw - 50px);
+}
+
+.tempoListItem {
+  font-family: 'Inter', sans-serif;
+  width: 112px;
+  font-size: 60px;
+  color: rgba(4,21,63, 1);
+  border-radius: 8px;
+  text-align: center;
+  scroll-snap-align: center;
+  position: relative;
+  margin-right: 20px;
+  letter-spacing: -4.5px;
+  flex-shrink: 0;
+  line-height: 1;
+}
+
+.tempoListItem:hover {
+  background-color: rgba(4,21,63, .1);
+}
+
+.tempoListItem:last-child {
+  margin-right: 0;
+}
+
+.tempoListItem:last-child:after {
+  height: 1px;
+  content: '';
+  display: block;
+  position: absolute;
+  top: 0;
+  right: calc((50vw * -1) + 50%);
+  width: calc(50vw - 50%);
+}
+
+.wrapper {
+  position: relative; 
+}
+.skipButton {
+  border: none;
+  outline: none;
+  top: 6px;
+  z-index: 100;
+  font-family: "Inter", sans-serif;
+  width: 48px;
+  height: 48px;
+  border-radius: 100%;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  background: rgba(4,21,63, 1);
+  color: white;
+  font-size: 16px;
+  position: absolute;
+}
+
+.skipButtonLeft {
+  left: 4px;
+}
+.skipButtonRight {
+  right: 4px;
+}
