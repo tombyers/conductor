@@ -1,5 +1,6 @@
 import Head from 'next/head'
 import OnBeat from '../components/OnBeat'
+import Logo from '../components/Logo'
 
 export default function Home() {
   return (
@@ -10,6 +11,7 @@ export default function Home() {
         <script src="https://unpkg.com/unmute" data-add-button="true"></script>
       </Head>
 
+      <Logo />
       <OnBeat />
     </div>
   )

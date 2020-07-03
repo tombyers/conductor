@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 
+import styles from './OnBeat.module.css'
 import PlayButton from './PlayButton'
 import TempoSelector from './TempoSelector'
 import Tone, { Synth } from 'tone'
@@ -40,7 +41,7 @@ const OnBeat = () => {
     }, [tempo])
   
     return (
-      <main>
+      <main className={styles.container}>
         <PlayButton isPlaying={isPlaying} togglePlay={togglePlay} />
         <TempoSelector tempo={tempo} setTempo={setTempo} minTempo={30} maxTempo={300} />
       </main>

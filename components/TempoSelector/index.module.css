@@ -6,6 +6,9 @@
   scroll-snap-type: x proximity;
   width: auto;
   padding-left: calc(50vw - 50px);
+  padding-top: 48px;
+  padding-bottom: 48px;
+  background-color: white;
 }
 
 .tempoListItem {
@@ -43,11 +46,12 @@
 
 .wrapper {
   position: relative; 
+  flex-shrink: 0;
 }
 .skipButton {
   border: none;
   outline: none;
-  top: 6px;
+  top: 54px;
   z-index: 100;
   font-family: "Inter", sans-serif;
   width: 48px;
@@ -61,8 +65,8 @@
 }
 
 .skipButtonLeft {
-  left: 4px;
+  left: 8px;
 }
 .skipButtonRight {
-  right: 4px;
+  right: 8px;
 }
